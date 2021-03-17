@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"log"
+	"time"
+)
 
 // Userの方を定義する
 type User struct {
@@ -23,7 +26,13 @@ func (u *User) CreateUser() (err error) {
 	/*
 		コマンドを実行するExecメソッドを使用する
 		引数はクエリ文字列とパラメータ返り値はResult型とerror型を返す
+		パスワードやUUIDはbase.goでメソッドを作成しているが何もしていない場合は下記となる予定
+		_, err = Db.Exec(cmd, u.UUID, u.Name, u.Email, u.Password, u.CreatedAt)
+		time.Nowは現在の時間を取得している
 	*/
-	_, err = Db.Exec(cmd, u.UUID, u.Name, u.Email, u.Password, u.CreatedAt)
+	_, err = Db.Exec(cmd, createUUID(), u.Name, u.Email, Encrypt(u.Password), time.Now())
+	if err != nil {
+		log.Fatalln(err)
+	}
 	return err
 }

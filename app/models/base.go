@@ -1,6 +1,7 @@
 package models
 
 import (
+	"crypto/sha1"
 	"database/sql"
 	"fmt"
 	"log"
@@ -50,4 +51,12 @@ func init() {
 func createUUID() (uuidobj uuid.UUID) {
 	uuidobj, _ = uuid.NewUUID()
 	return uuidobj
+}
+
+/*
+	入力された文字列を受け取り暗号化（今回はハッシュ化）させて返すメソッド
+*/
+func Encrypt(plaintext string) (cryptext string) {
+	cryptext = fmt.Sprintf("%x", sha1.Sum([]byte(plaintext)))
+	return cryptext
 }

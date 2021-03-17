@@ -43,3 +43,7 @@ sqlite3 webapp.sql
 
     SQLiteを抜ける
     .exit
+
+UUID を作成のためにライブラリ（モジュール）をインポートする
+
+    go get github.com/google/uuid

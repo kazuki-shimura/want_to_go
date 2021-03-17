@@ -3,7 +3,7 @@ module want_to_go
 go 1.15
 
 require (
-	github.com/google/uuid v1.2.0 // indirect
+	github.com/google/uuid v1.2.0
 	github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe // indirect
 	github.com/mattn/go-sqlite3 v1.14.6
 	github.com/smartystreets/assertions v1.2.0 // indirect
