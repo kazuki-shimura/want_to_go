@@ -6,6 +6,7 @@ import (
 	"log"
 	"want_to_go/config"
 
+	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -39,4 +40,14 @@ func init() {
 
 	/* 作成したコマンドの実行 */
 	Db.Exec(cmdCreateUserTable)
+}
+
+/*
+	uuidを作成できるライブラリを使用
+	NewUUIDメソッドを使用して一意の（大体）idを作成する
+	厳密には重複する確率が限りなく0に近い
+*/
+func createUUID() (uuidobj uuid.UUID) {
+	uuidobj, _ = uuid.NewUUID()
+	return uuidobj
 }
