@@ -17,10 +17,14 @@ func main() {
 	fmt.Println(models.Db)
 
 	/*Userの作成*/
-	u := &models.User{}
-	u.Name = "test"
-	u.Email = "test@gmail.com"
-	u.Password = "testtest"
+	// u := &models.User{}
+	// u.Name = "test"
+	// u.Email = "test@gmail.com"
+	// u.Password = "testtest"
+	// fmt.Println(u)
+	// u.CreateUser()
+
+	/*　IDを使用したUserの取得　*/
+	u, _ := models.GetUser(1)
 	fmt.Println(u)
-	u.CreateUser()
 }

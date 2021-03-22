@@ -30,9 +30,29 @@ func (u *User) CreateUser() (err error) {
 		_, err = Db.Exec(cmd, u.UUID, u.Name, u.Email, u.Password, u.CreatedAt)
 		time.Nowは現在の時間を取得している
 	*/
-	_, err = Db.Exec(cmd, createUUID(), u.Name, u.Email, Encrypt(u.Password), time.Now())
+	_, err = Db.Exec(cmd,
+		createUUID(),
+		u.Name,
+		u.Email,
+		Encrypt(u.Password),
+		time.Now())
 	if err != nil {
 		log.Fatalln(err)
 	}
 	return err
+}
+
+func GetUser(id int) (user User, err error) {
+	user = User{}
+	cmd := `select id, uuid, name, email, password, created_at 
+		from users where id = ?`
+	err = Db.QueryRow(cmd, id).Scan(
+		&user.ID,
+		&user.UUID,
+		&user.Name,
+		&user.Email,
+		&user.Password,
+		&user.CreatedAt,
+	)
+	return user, err
 }
